@@ -62,7 +62,7 @@ public class Controller {
         for (Map.Entry<String, String> side: compassModel.getAllSides().entrySet()) {
             lowBound = Integer.parseInt(side.getValue().split("-")[0]);
             highBound = Integer.parseInt(side.getValue().split("-")[1]);
-            if (side.getKey().equals("North")) {
+            if (lowBound > highBound) {
                 if ((currentDegree >= lowBound && currentDegree < 360) || (currentDegree >= 0 && currentDegree <= highBound)) {
                     str = side.getKey();
                     break;
@@ -73,6 +73,9 @@ public class Controller {
                     break;
                 }
             }
+        }
+        if (str.equals("")) {
+            str = "Not Found!!! Wrong digit!";
         }
         resultSide.put("Side", str);
         return resultSide;
